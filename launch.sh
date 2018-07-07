@@ -1,4 +1,5 @@
 make fclean
 make
 make clean
-./filler_vm -f maps/map00 -p1 ./giena.filler -p2 players/carli.filler
+#remove flag -g from Makefile
+./filler_vm -f maps/map00 -p2 ./giena.filler -p1 players/carli.filler

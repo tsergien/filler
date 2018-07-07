@@ -16,13 +16,34 @@
 # include "../libft/includes/get_next_line.h"
 # include <stdio.h>//
 
+typedef struct	s_dot
+{
+	short int	x;
+	short int	y;
+}				t_dot;
+
 typedef struct	s_grid
 {
 	short int	**grid;
 	short int	x;
 	short int	y;
+	short int	player_num;
 }				t_grid;
 
+typedef struct	s_piece
+{
+	short int	cols;
+	short int	rows;
+	t_dot		*coords;
+}				t_piece;
+
+/***************FILLER*******************/
+void	fill();
+/***************READING******************/
 void	get_grid();
+
+/****************MAP*********************/
+void	print_map(short int **map, short int x, short int y);
+
 
 #endif
