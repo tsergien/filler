@@ -32,18 +32,20 @@ typedef struct	s_grid
 
 typedef struct	s_piece
 {
-	short int	cols;
 	short int	rows;
+	short int	cols;
 	t_dot		*coords;
 }				t_piece;
 
-/***************FILLER*******************/
+/***************FILLER******************/
 void	fill();
-/***************READING******************/
-void	get_grid();
+/***************READING*****************/
+void	get_grid(t_grid *field);
 
-/****************MAP*********************/
+/****************MAP********************/
 void	print_map(short int **map, short int x, short int y);
 
+/****************PIECE******************/
+void	get_piece(t_piece *piece);
 
 #endif

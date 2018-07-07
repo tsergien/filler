@@ -1,48 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   piece.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsergien <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/07 09:36:46 by tsergien          #+#    #+#             */
-/*   Updated: 2018/07/07 09:36:47 by tsergien         ###   ########.fr       */
+/*   Created: 2018/07/07 12:25:11 by tsergien          #+#    #+#             */
+/*   Updated: 2018/07/07 12:25:12 by tsergien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/filler.h"
 
-static char	get_symbol(short int cell)
+void	get_piece(t_piece *piece)
 {
-	if (cell == 0)
-		return ('.');
-	if (cell == 1)
-		return ('O');
-	if (cell == 2)
-		return ('X');
-	if (cell == -1)
-		return ('o');
-	return ('x');
-}
-
-void	print_map(short int **map, short int x, short int y)
-{
+	char	*line;
 	int		i;
 	int		j;
-	char	temp;
 
+	get_next_line(0, &line);
+	get_xy(piece->cols, piece->rows);
 	i = 0;
-	while (i < y)
+	//how much memory do i need??? for coords
+	while (get_next_line(0, &line) > 0)
 	{
-		write(3, "***-> ", 6);
 		j = 0;
-		while (j < x)
+		while (*line)
 		{
-			temp = get_symbol(map[i][j]);
-			write(3, &temp, 1);
+			if (*line == '*')
+				//set coords x = j, y = i
 			j++;
 		}
-		write(3, "\n", 1);
-		i++;
 	}
 }

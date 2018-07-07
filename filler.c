@@ -14,5 +14,9 @@
 
 void	fill()
 {
-	get_grid();
+	t_grid	*field;
+	t_piece	*piece;
+
+	get_grid(field);
+	get_piece(piece);
 }

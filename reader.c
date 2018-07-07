@@ -12,24 +12,24 @@
 
 #include "includes/filler.h"
 
-static void	get_xy(t_grid *field)
+void				get_xy(short int *x, short int *y)
 {
 	char	*line;
 
 	get_next_line(0, &line);
 	while (*line && !ft_isdigit(*line))
 		line++;
-	field->y = ft_atoi(line);
+	*y = ft_atoi(line);
 	dprintf(3, "y: %d\n", field->y);/////
 	while (ft_isdigit(*line))
 		line++;
 	while (*line && !ft_isdigit(*line))
 		line++;
-	field->x = ft_atoi(line);
+	*x = ft_atoi(line);
 	dprintf(3, "x: %d\n", field->x);/////
 }
 
-void		set_line(char *line, short int *array)
+void				set_line(char *line, short int *array)
 {
 	int		i;
 
@@ -50,7 +50,7 @@ void		set_line(char *line, short int *array)
 	}
 }
 
-short int	get_num_str(char *line)
+static short int	get_num_str(char *line)
 {
 	while (*line && !ft_isdigit(*line))
 		line++;
@@ -59,26 +59,25 @@ short int	get_num_str(char *line)
 	return (ft_atoi(line));
 }
 
-void		get_grid()
+void				get_grid(t_grid *field)
 {
 	char	*line;
 	int		fd;
-	t_grid	field;
 	int		i;
 
 	i = -1;
-	fd = open("file.txt", O_CREAT | O_WRONLY | O_TRUNC);//del later.or not
+	fd = open("file.txt", O_CREAT | O_WRONLY | O_TRUNC);
 	get_next_line(0, &line);
 	field.player_num = get_num_str(line);
-	get_xy(&field);
+	get_xy(field->x, field->y);
 	get_next_line(0, &line);
-	field.grid = (short int **)malloc(sizeof(short int *) * (field.y + 1));
+	field->grid = (short int **)malloc(sizeof(short int *) * (field->y + 1));
 	while (++i < field.y)
 	{
 		get_next_line(0, &line);
-		field.grid[i] = (short int *)malloc(sizeof(short int) * (field.x + 1));
+		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x + 1));
 		set_line(line + 4, field.grid[i]);
 	}
-	print_map(field.grid, field.x, field.y);
+	print_map(field->grid, field->x, field->y);//
 	free(line);
 }
