@@ -46,3 +46,24 @@ void	print_map(short int **map, short int x, short int y)
 		i++;
 	}
 }
+
+void	print_map_dist(short int **map, short int x, short int y)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < y)
+	{
+		write(3, "***-> ", 6);
+		j = 0;
+		while (j < x)
+		{
+			ft_putnbr_fd(map[i][j], 3);
+			write(3, "|", 1);
+			j++;
+		}
+		write(3, "\n", 1);
+		i++;
+	}
+}

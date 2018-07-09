@@ -95,5 +95,7 @@ static t_dot	*insert_piece(t_grid *field, t_piece *piece)
 t_dot			*find_dot(t_grid *field, t_piece *piece)
 {
 	fill_distances(field);
+	dprintf(3, "DIST***************\n\n");//
+	print_map_dist(field->grid, field->x, field->y);//
 	return (insert_piece(field, piece));
 }

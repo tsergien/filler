@@ -12,15 +12,11 @@
 
 #include "includes/filler.h"
 
-void	output(t_dot *xy)
+void	output(t_dot *xy)//
 {
-	char	tmp;
-
-	tmp = '0' + xy->x;
-	write(1, &tmp, 1);
+	ft_putnbr(xy->x);
 	write(1, " ", 1);
-	tmp = '0' + xy->y;
-	write(1, &tmp, 1);
+	ft_putnbr(xy->y);
 	write(1, "\n", 1);
 }
 
@@ -35,5 +31,7 @@ void	fill_grid()
 	get_grid(field);
 	get_piece(piece);
 	res = find_dot(field, piece);
+	dprintf(3, "res->x: %d\n", res->x);
+	dprintf(3, "res->y: %d\n", res->y);
 	output(res);
 }

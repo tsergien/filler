@@ -26,11 +26,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR)
-	@gcc $(OBJ) -o $(NAME) -L $(LIB_DIR) -lft
+	@gcc $(FLAGS) -g $(SRC) -o $(NAME) -L $(LIB_DIR) -lft
+	# @gcc $(OBJ) -o $(NAME) -L $(LIB_DIR) -lft
 	@echo "=== ready player one :)==="
 
-%.o: %.c
-	@gcc $(FLAGS) -o $@ -c $< $(HEADER)
+# %.o: %.c
+# 	@gcc $(FLAGS) -o $@ -c $< $(HEADER)
 
 clean:
 	@make -C $(LIB_DIR) clean -silent

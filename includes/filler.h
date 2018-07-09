@@ -46,7 +46,9 @@ void	get_grid(t_grid *field);
 void	get_xy(short int *x, short int *y);
 
 /****************MAP********************/
-void	print_map(short int **map, short int x, short int y);
+void	print_map(short int **map, short int x, short int y);//
+
+void	print_map_dist(short int **map, short int x, short int y);//
 
 /****************PIECE******************/
 void	get_piece(t_piece *piece);
