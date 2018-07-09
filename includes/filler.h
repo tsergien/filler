@@ -38,14 +38,19 @@ typedef struct	s_piece
 }				t_piece;
 
 /***************FILLER******************/
-void	fill();
+void	fill_grid();
+t_dot	*find_dot(t_grid *field, t_piece *piece);
+
 /***************READING*****************/
 void	get_grid(t_grid *field);
+void	get_xy(short int *x, short int *y);
 
 /****************MAP********************/
 void	print_map(short int **map, short int x, short int y);
 
 /****************PIECE******************/
 void	get_piece(t_piece *piece);
+int		is_end_game(t_piece *piece, t_grid *field);
+int		insertable(t_piece *piece, short int x, short int y, t_grid *field);
 
 #endif

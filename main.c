@@ -14,6 +14,6 @@
 
 int		main()
 {	
-	fill();
+	fill_grid();
 	return (0);
 }

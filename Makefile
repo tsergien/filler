@@ -12,7 +12,7 @@
 
 NAME = giena.filler
 
-SRC = main.c reader.c distance.c map.c filler.c
+SRC = main.c reader.c distance.c map.c filler.c piece.c
 
 OBJ = $(SRC:.c=.o)
 
