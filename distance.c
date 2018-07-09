@@ -28,6 +28,7 @@ static void		fill_min_dist(short int x, short int y, t_grid *field)
 		{
 			if (field->grid[i][j] == -op_num && (ABS(x - j) + ABS(y - i)) < field->grid[x][y])
 				field->grid[x][y] = ABS(x - j) + ABS(y - i);
+			dprintf(3, "field->grid[x][y]: %d\n", field->grid[x][y]);
 		}
 	}
 }
@@ -94,6 +95,7 @@ static t_dot	*insert_piece(t_grid *field, t_piece *piece)
 
 t_dot			*find_dot(t_grid *field, t_piece *piece)
 {
+		dprintf(3, "____________field->grid[x][y]: %d\n", field->grid[0][0]);
 	fill_distances(field);
 	dprintf(3, "DIST***************\n\n");//
 	print_map_dist(field->grid, field->x, field->y);//
