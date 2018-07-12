@@ -38,7 +38,7 @@ static int		dist_sum(short int **map, t_piece *tok, short int x, short int y)
 
 int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 {
-	int			overlap;
+	short int	overlap;
 	short int	op_num;
 	t_dot		*ptr_coords;
 
@@ -47,8 +47,7 @@ int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 	op_num = (map->player_num == 1 ? 2 : 1);
 	while (ptr_coords->x != -1)
 	{
-		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -map->player_num
-			|| map->grid[y + ptr_coords->y][x + ptr_coords->x] > 0)
+		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -map->player_num)
 			overlap++;
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x]
 		 == -op_num || overlap > 1)
@@ -80,14 +79,14 @@ t_dot		*find_spot(t_piece *piece, t_grid *field)
 			if (insertable(piece, j, i, field))
 			{
 				print_coords(piece->coords);
-				dprintf(3, "insertable: j: %d, i: %d\n", j , i);
+				dprintf(3, "insertable: j: %d, i: %d\n", j , i);/////////////
 				new_dist = dist_sum(field->grid, piece, j, i);
 				if (new_dist < dist)
 				{
 					dist = (dist > new_dist ? new_dist : dist);
 					set_dot(opt, j, i);
 				}
-				dprintf(3, "opt: \n");
+				dprintf(3, "opt: ");////
 				print_dot(opt);
 			}
 		}
@@ -106,7 +105,7 @@ void	get_piece(t_piece *piece)
 	piece->coords = (t_dot *)malloc(sizeof(t_dot) * (piece->rows * piece->cols + 1));
 	i = -1;
 	ptr_coord = piece->coords;
-	dprintf(3, "piece rows: %d\n", piece->rows);//////////////
+	//dprintf(3, "piece rows: %d\n", piece->rows);//////////////
 	while (++i < piece->rows)
 	{
 		get_next_line(0, &line);
@@ -117,8 +116,8 @@ void	get_piece(t_piece *piece)
 			{
 				ptr_coord->x = j;
 				ptr_coord->y = i;
-				dprintf(3, "ptr_coord->x: %d\n", ptr_coord->x);//
-			 	dprintf(3, "ptr_coord->y: %d\n", ptr_coord->y);//
+				//dprintf(3, "ptr_coord->x: %d\n", ptr_coord->x);//
+			 	//dprintf(3, "ptr_coord->y: %d\n", ptr_coord->y);//
 				ptr_coord++;
 			}
 			j++;
