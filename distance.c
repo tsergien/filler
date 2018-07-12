@@ -56,3 +56,15 @@ t_dot			*find_dot(t_grid *field, t_piece *piece)
 	print_map_dist(field->grid, field->x, field->y);//////////
 	return (find_spot(piece, field));
 }
+
+void			bzero_coords(t_dot *s, int n)
+{
+	t_dot	*ptr;
+
+	ptr = s;
+	while (n--)
+	{
+		set_dot(ptr, 0, 0);
+		ptr++;
+	}
+}

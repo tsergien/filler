@@ -17,12 +17,6 @@
 ** remember that distances are already filled ** 
 */
 
-void		set_dot(t_dot *xy, short int x, short int y)
-{
-	xy->x = x;
-	xy->y = y;
-}
-
 static int		dist_sum(short int **map, t_piece *tok, short int x, short int y)
 {
 	int		sum;
@@ -108,9 +102,9 @@ void	get_piece(t_piece *piece)
 
 	get_xy(&piece->cols, &piece->rows);
 	piece->coords = (t_dot *)malloc(sizeof(t_dot) * (piece->rows * piece->cols + 1));
+	bzero_coords(piece->coords, piece->rows * piece->cols + 1);
 	i = -1;
 	ptr_coord = piece->coords;
-	//dprintf(3, "piece rows: %d\n", piece->rows);//////////////
 	while (++i < piece->rows)
 	{
 		get_next_line(0, &line);
@@ -133,24 +127,3 @@ void	get_piece(t_piece *piece)
 	print_coords(piece->coords);
 	free(line);
 }
-
-// int		is_end_game(t_piece *piece, t_grid *field)//use it?
-// {
-// 	int		i;
-// 	int		j;
-
-// 	i = -1;
-// 	while (++i < field->y)
-// 	{
-// 		j = -1;
-// 		while (++j < field->x)
-// 		{
-// 			if (insertable(piece, j, i, field))
-// 			{
-// 				dprintf(3, "*** THE END ***\n");//////////////
-// 				return (0);
-// 			}
-// 		}
-// 	}
-// 	return (1);
-// }

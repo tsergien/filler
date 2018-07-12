@@ -52,15 +52,26 @@ void				get_grid(t_grid *field)
 	int		i;
 
 	i = -1;
+	if (field->launch)
+	{	get_next_line(0, &line);
+	dprintf(3, "launch: %d, line: %s\n", field->launch, line);
+	}
 	get_xy(&(field->x), &(field->y));
 	get_next_line(0, &line);
-	field->grid = (short int **)malloc(sizeof(short int *) * (field->y + 1));
+	field->grid = (short int **)malloc(sizeof(short int *) * (field->y));
 	while (++i < field->y)
 	{
 		get_next_line(0, &line);
-		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x + 1));
+		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x));
+		ft_bzero(field->grid[i], field->x);
 		set_line(line + 4, field->grid[i]);
 	}
 	print_map(field->grid, field->x, field->y);////////
 	free(line);
+}
+
+void		set_dot(t_dot *xy, short int x, short int y)
+{
+	xy->x = x;
+	xy->y = y;
 }

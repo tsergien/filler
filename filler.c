@@ -45,7 +45,7 @@ static void			free_job(short int **map, short int lines, t_dot *coords)
 	while (++i < lines)
 		free(map[i]);
 	free(coords);
-	dprintf(3, "*** FREED ****_______________________________________\n");//////////////
+	dprintf(3, "___________________________*** FREED ****_________________________\n");//////////////
 }
 
 void				fill_grid()
@@ -62,6 +62,7 @@ void				fill_grid()
 	get_next_line(0, &line);
 	field->player_num = get_num_str(line);
 	free(line);
+	field->launch = 0;
 	while (1)
 	{
 		dprintf(3, "********* START ************\n");
@@ -70,6 +71,7 @@ void				fill_grid()
 		res = find_dot(field, piece);
 		free_job(field->grid, field->y, piece->coords);
 		output_fd(res);
+		field->launch = 1;
 		output(res);
 		dprintf(3, "res->x: %d\n", res->x);
 		dprintf(3, "res->y: %d\n", res->y);

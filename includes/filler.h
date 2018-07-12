@@ -28,6 +28,7 @@ typedef struct	s_grid
 	short int	x;
 	short int	y;
 	short int	player_num;
+	char		launch;
 }				t_grid;
 
 typedef struct	s_piece
@@ -60,5 +61,7 @@ t_dot	*find_spot(t_piece *piece, t_grid *field);
 void	get_piece(t_piece *piece);
 int		is_end_game(t_piece *piece, t_grid *field);
 int		insertable(t_piece *piece, short int x, short int y, t_grid *field);
+void	bzero_coords(t_dot *s, int n);
+void	set_dot(t_dot *xy, short int x, short int y);
 
 #endif
