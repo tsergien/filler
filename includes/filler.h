@@ -47,8 +47,14 @@ void	get_xy(short int *x, short int *y);
 
 /****************MAP********************/
 void	print_map(short int **map, short int x, short int y);//
+void	print_coords(t_dot *coords);
+void	print_dot(t_dot *xy);
 
 void	print_map_dist(short int **map, short int x, short int y);//
+
+/****************DISTANCE**************/
+void	fill_min_dist(short int x, short int y, t_grid *field);
+t_dot	*find_spot(t_piece *piece, t_grid *field);
 
 /****************PIECE******************/
 void	get_piece(t_piece *piece);

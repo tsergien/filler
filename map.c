@@ -25,6 +25,11 @@ static char	get_symbol(short int cell)
 	return ('x');
 }
 
+void	print_dot(t_dot *xy)
+{
+	dprintf(3, "x: %d, y: %d\n", xy->x, xy->y);
+}
+
 void	print_map(short int **map, short int x, short int y)
 {
 	int		i;
@@ -53,17 +58,29 @@ void	print_map_dist(short int **map, short int x, short int y)
 	int		j;
 
 	i = 0;
+	write(3, "          *** DISTANCE MAP ***\n", 31);
 	while (i < y)
 	{
 		write(3, "***-> ", 6);
 		j = 0;
 		while (j < x)
 		{
-			ft_putnbr_fd(map[i][j], 3);
-			write(3, "|", 1);
+			dprintf(3, "%3d|", map[i][j]);
 			j++;
 		}
-		write(3, "\n", 1);
+		dprintf(3, "\n");
 		i++;
+	}
+}
+
+void	print_coords(t_dot *coords)
+{
+	t_dot *p;
+
+	p = coords;
+	while (p->x != -1)
+	{
+		dprintf(3, "p->x: %d, p->y: %d\n", p->x, p->y);
+		p++;
 	}
 }

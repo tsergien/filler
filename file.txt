@@ -1,117 +1,44 @@
 y: 6
 x: 10
 ***-> ..........
-***-> .ooo......
-***-> oooo......
+***-> ..o.......
+***-> ..........
 ***-> .........x
 ***-> ..........
 ***-> ..........
-y: 4
-x: 7
-rows: 4
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: .......
-line: ....*..
-line: ....*..
-line: ....*..
-line: ....*..
-line: ....*..
-coords->x: 4
-coords->y: 2
-line: ....*..
-line: ....*..
-line: ....***
-line: ....***
-line: ....***
-line: ....***
-line: ....***
-coords->x: 4
-coords->y: 3
-line: ....***
-coords->x: 5
-coords->y: 3
-line: ....***
-coords->x: 6
-coords->y: 3
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 13
-field->grid[x][y]: 10
-field->grid[x][y]: 9
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 2
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-field->grid[x][y]: 1
-DIST***************
-
-***-> 0|0|0|0|0|0|0|0|0|0|
-***-> 0|-1|-1|-1|0|0|0|0|0|0|
-***-> -1|-1|-1|-1|0|0|0|0|0|0|
-***-> 0|0|0|0|0|0|0|0|0|1|
-***-> 0|0|0|0|0|0|0|0|0|0|
-***-> 0|0|0|0|0|0|0|0|0|0|
-res->x: 0
-res->y: 0
+y: 3
+x: 4
+piece rows: 3
+ptr_coord->x: 2
+ptr_coord->y: 1
+ptr_coord->x: 3
+ptr_coord->y: 1
+ptr_coord->x: 1
+ptr_coord->y: 2
+ptr_coord->x: 2
+ptr_coord->y: 2
+p->x: 2, p->y: 1
+p->x: 3, p->y: 1
+p->x: 1, p->y: 2
+p->x: 2, p->y: 2
+          *** DISTANCE MAP ***
+***->   0|  0|  0|  0|  0|  0|  0|  0|  0|  0|
+***->   0|  0| -1|  0|  0|  0|  0|  0|  0|  0|
+***->   0|  0|  0|  0|  0|  0|  0|  0|  0|  0|
+***->   0|  0|  0|  0|  0|  0|  0|  0|  0| -2|
+***->   0|  0|  0|  0|  0|  0|  0|  0|  0|  0|
+***->   0|  0|  0|  0|  0|  0|  0|  0|  0|  0|
+          *** DISTANCE MAP ***
+***->  12| 11| 10|  9|  8|  7|  6|  5|  4|  3|
+***->  11| 10| -1|  8|  7|  6|  5|  4|  3|  2|
+***->  10|  9|  8|  7|  6|  5|  4|  3|  2|  1|
+***->   9|  8|  7|  6|  5|  4|  3|  2|  1| -2|
+***->  10|  9|  8|  7|  6|  5|  4|  3|  2|  1|
+***->  11| 10|  9|  8|  7|  6|  5|  4|  3|  2|
+p->x: 2, p->y: 1
+p->x: 3, p->y: 1
+p->x: 1, p->y: 2
+p->x: 2, p->y: 2
+insertable: j: 9, i: 0
+opt: 
+x: 0, y: 0

@@ -46,15 +46,6 @@ void				set_line(char *line, short int *array)
 	}
 }
 
-static short int	get_num_str(char *line)
-{
-	while (*line && !ft_isdigit(*line))
-		line++;
-	if (!(*line))
-		return (0);
-	return (ft_atoi(line));
-}
-
 void				get_grid(t_grid *field)
 {
 	char	*line;
@@ -63,8 +54,6 @@ void				get_grid(t_grid *field)
 
 	i = -1;
 	fd = open("file.txt", O_CREAT | O_WRONLY | O_TRUNC);
-	get_next_line(0, &line);
-	field->player_num = get_num_str(line);//line : $$$ exec p1 : [./giena.filler]
 	get_xy(&(field->x), &(field->y));
 	get_next_line(0, &line);
 	field->grid = (short int **)malloc(sizeof(short int *) * (field->y + 1));
