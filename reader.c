@@ -59,7 +59,6 @@ void				get_grid(t_grid *field, char *line)
 		ft_bzero(field->grid[i], field->x);
 		set_line(line + 4, field->grid[i]);
 	}
-	//print_map(field->grid, field->x, field->y);////////
 }
 
 void		set_dot(t_dot *xy, short int x, short int y)

@@ -66,7 +66,6 @@ void				fill_grid()
 		if (ft_strncmp(line, "Plateau", 7) == 0)
 			get_grid(field, line);
 		get_piece(piece);
-		//dprintf(fd, "********* START **********\n");
 		res = find_dot(field, piece);
 		free_job(field->grid, field->y, piece->coords);
 		free(line);

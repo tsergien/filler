@@ -38,7 +38,6 @@ static void		fill_distances(t_grid *field)
 	int		j;
 
 	i = -1;
-	//print_map_dist(field->grid, field->x, field->y);////
 	while (++i < field->y)
 	{
 		j = -1;
@@ -53,7 +52,6 @@ static void		fill_distances(t_grid *field)
 t_dot			*find_dot(t_grid *field, t_piece *piece)
 {
 	fill_distances(field);
-	//print_map_dist(field->grid, field->x, field->y);//////////
 	return (find_spot(piece, field));
 }
 
