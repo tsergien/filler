@@ -12,11 +12,11 @@
 
 #include "includes/filler.h"
 
-void				get_xy(short int *x, short int *y)
+void				get_xy(short int *x, short int *y, char *line)
 {
-	char	*line;
+	//char	*line;
 
-	get_next_line(0, &line);
+	//get_next_line(0, &line);while gnl... in filler.c
 	while (*line && !ft_isdigit(*line))
 		line++;
 	*y = ft_atoi(line);
@@ -44,17 +44,12 @@ void				set_line(char *line, short int *array)
 	}
 }
 
-void				get_grid(t_grid *field)
+void				get_grid(t_grid *field, char *line)
 {
-	char	*line;
 	int		i;
 
 	i = -1;
-	if (field->launch)
-	{	get_next_line(0, &line);
-	dprintf(3, "launch: %d, line: %s\n", field->launch, line);
-	}
-	get_xy(&(field->x), &(field->y));
+	get_xy(&(field->x), &(field->y), line);
 	get_next_line(0, &line);
 	field->grid = (short int **)malloc(sizeof(short int *) * (field->y));
 	while (++i < field->y)
@@ -64,8 +59,7 @@ void				get_grid(t_grid *field)
 		ft_bzero(field->grid[i], field->x);
 		set_line(line + 4, field->grid[i]);
 	}
-	print_map(field->grid, field->x, field->y);////////
-	free(line);
+	//print_map(field->grid, field->x, field->y);////////
 }
 
 void		set_dot(t_dot *xy, short int x, short int y)

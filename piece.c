@@ -32,7 +32,7 @@ static int		dist_sum(short int **map, t_piece *tok, short int x, short int y)
 	return (sum);
 }
 
-int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
+static int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 {
 	short int	overlap;
 	short int	op_num;
@@ -43,8 +43,6 @@ int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 	op_num = (map->player_num == 1 ? 2 : 1);
 	while (ptr_coords->x != -1)
 	{
-		if (y + ptr_coords->y > map->y || x + ptr_coords->x > map->x)
-			return (0);
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -map->player_num)
 			overlap++;
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x]
@@ -69,24 +67,19 @@ t_dot		*find_spot(t_piece *piece, t_grid *field)
 	i = -1;
 	dist = field->x + field->y + 1;
 	set_dot(opt, 0, 0);
-	while (++i < field->y)
+	while (++i < field->y - piece->rows + 1)
 	{
 		j = -1;
-		while (++j < field->x)
+		while (++j < field->x - piece->cols + 1)
 		{
 			if (insertable(piece, j, i, field))
 			{
-				print_coords(piece->coords);
-				dprintf(3, "insertable: j: %d, i: %d\n", j , i);/////////////
 				new_dist = dist_sum(field->grid, piece, j, i);
-				dprintf(3, "dist: %d\n", new_dist);///////////////////
 				if (new_dist < dist)
 				{
 					dist = new_dist;
 					set_dot(opt, j, i);
 				}
-				dprintf(3, "New opt: ");//////////////
-				print_dot(opt);
 			}
 		}
 	}
@@ -114,6 +107,21 @@ short int	get_char_token(char **tok, short int lines)
 	return (ast);
 }
 
+static void	get_xy_piece(short int *x, short int *y)
+{
+	char	*line;
+
+	get_next_line(0, &line);
+	while (*line && !ft_isdigit(*line))
+		line++;
+	*y = ft_atoi(line);
+	while (ft_isdigit(*line))
+		line++;
+	while (*line && !ft_isdigit(*line))
+		line++;
+	*x = ft_atoi(line);
+}
+
 void	get_piece(t_piece *piece)
 {
 	char		**tok;
@@ -122,7 +130,7 @@ void	get_piece(t_piece *piece)
 	t_dot		*ptr_coord;
 	short int	ast;
 
-	get_xy(&piece->cols, &piece->rows);
+	get_xy_piece(&piece->cols, &piece->rows);
 	tok = (char **)malloc(sizeof(char *) * piece->rows);
 	ast = get_char_token(tok, piece->rows);
 	piece->coords = (t_dot *)malloc(sizeof(t_dot) * (ast + 1));
@@ -131,7 +139,6 @@ void	get_piece(t_piece *piece)
 	ptr_coord = piece->coords;
 	while (++i < piece->rows)
 	{
-		//dprintf(3, "line: %s\n", tok[i]);
 		j = -1;
 		while (tok[i][++j])
 		{
@@ -140,6 +147,5 @@ void	get_piece(t_piece *piece)
 		}
 	}
 	set_dot(ptr_coord, -1, -1);
-	print_coords(piece->coords);/////////
 	free_matrix(tok, piece->rows);
 }

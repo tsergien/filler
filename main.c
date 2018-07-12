@@ -12,8 +12,8 @@
 
 #include "includes/filler.h"
 
-int		main()
-{	
+int		main(void)
+{
 	fill_grid();
 	return (0);
 }

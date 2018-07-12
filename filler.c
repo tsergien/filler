@@ -14,19 +14,20 @@
 
 static void			output(t_dot *xy)
 {
-	ft_putnbr(xy->x);
+	ft_putnbr_fd(xy->y, 1);
 	write(1, " ", 1);
-	ft_putnbr(xy->y);
+	ft_putnbr_fd(xy->x, 1);
 	write(1, "\n", 1);
 }
-static void			output_fd(t_dot *xy)
-{
-	dprintf(3, "*** On the standart output: ***\n");
-	ft_putnbr_fd(xy->x, 3);
-	write(3, " ", 1);
-	ft_putnbr_fd(xy->y, 3);
-	write(3, "\n", 1);
-}
+
+// static void			output_fd(t_dot *xy)
+// {
+// 	dprintf(fd, "*** On the standart output: ***|\n");
+// 	ft_putnbr_fd(xy->x, fd);
+// 	write(fd, " ", 1);
+// 	ft_putnbr_fd(xy->y, fd);
+// 	write(fd, "\n", 1);
+// }
 
 static short int	get_num_str(char *line)
 {
@@ -45,7 +46,6 @@ static void			free_job(short int **map, short int lines, t_dot *coords)
 	while (++i < lines)
 		free(map[i]);
 	free(coords);
-	dprintf(3, "___________________________*** FREED ****_________________________\n");//////////////
 }
 
 void				fill_grid()
@@ -54,26 +54,23 @@ void				fill_grid()
 	t_piece	*piece;
 	t_dot	*res;
 	char	*line;
-	int		fd;/////////
 
-	fd = open("file.txt", O_CREAT | O_WRONLY | O_TRUNC);//////////
 	field = (t_grid *)malloc(sizeof(t_grid));
 	piece = (t_piece *)malloc(sizeof(t_piece));
 	get_next_line(0, &line);
 	field->player_num = get_num_str(line);
 	free(line);
-	field->launch = 0;
-	while (1)
+	//fd = open("file.txt", O_CREAT | O_RDWR | O_TRUNC);//////////
+	while (get_next_line(0, &line) > 0)
 	{
-		dprintf(3, "********* START ************\n");
-		get_grid(field);
+		if (ft_strncmp(line, "Plateau", 7) == 0)
+			get_grid(field, line);
 		get_piece(piece);
+		//dprintf(fd, "********* START **********\n");
 		res = find_dot(field, piece);
 		free_job(field->grid, field->y, piece->coords);
-		output_fd(res);
-		field->launch = 1;
+		free(line);
+		//output_fd(res);
 		output(res);
-		dprintf(3, "res->x: %d\n", res->x);
-		dprintf(3, "res->y: %d\n", res->y);
 	}
 }

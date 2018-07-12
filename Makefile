@@ -26,7 +26,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR)
-	#@gcc $(FLAGS) $(SRC) -o $(NAME) -L $(LIB_DIR) -lft
 	@gcc $(OBJ) -o $(NAME) -L $(LIB_DIR) -lft
 	@echo "=== ready player one :)==="
 
