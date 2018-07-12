@@ -26,12 +26,14 @@ void		set_dot(t_dot *xy, short int x, short int y)
 static int		dist_sum(short int **map, t_piece *tok, short int x, short int y)
 {
 	int		sum;
+	t_dot	*ptr;
 
+	ptr = tok->coords;
 	sum = 0;
-	while (tok->coords->x != -1)
+	while (ptr->x != -1)
 	{
-		sum += map[y + tok->coords->y][x + tok->coords->x];
-		tok->coords++;
+		sum += map[y + ptr->y][x + ptr->x];
+		ptr++;
 	}
 	return (sum);
 }
@@ -47,6 +49,8 @@ int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 	op_num = (map->player_num == 1 ? 2 : 1);
 	while (ptr_coords->x != -1)
 	{
+		if (y + ptr_coords->y > map->y || x + ptr_coords->x > map->x)
+			return (0);
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -map->player_num)
 			overlap++;
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x]
@@ -81,12 +85,13 @@ t_dot		*find_spot(t_piece *piece, t_grid *field)
 				print_coords(piece->coords);
 				dprintf(3, "insertable: j: %d, i: %d\n", j , i);/////////////
 				new_dist = dist_sum(field->grid, piece, j, i);
+				dprintf(3, "dist: %d\n", new_dist);///////////////////
 				if (new_dist < dist)
 				{
-					dist = (dist > new_dist ? new_dist : dist);
+					dist = new_dist;
 					set_dot(opt, j, i);
 				}
-				dprintf(3, "opt: ");////
+				dprintf(3, "New opt: ");//////////////
 				print_dot(opt);
 			}
 		}

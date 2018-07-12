@@ -49,11 +49,9 @@ void				set_line(char *line, short int *array)
 void				get_grid(t_grid *field)
 {
 	char	*line;
-	int		fd;
 	int		i;
 
 	i = -1;
-	fd = open("file.txt", O_CREAT | O_WRONLY | O_TRUNC);
 	get_xy(&(field->x), &(field->y));
 	get_next_line(0, &line);
 	field->grid = (short int **)malloc(sizeof(short int *) * (field->y + 1));
@@ -63,6 +61,6 @@ void				get_grid(t_grid *field)
 		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x + 1));
 		set_line(line + 4, field->grid[i]);
 	}
-	print_map(field->grid, field->x, field->y);//
+	print_map(field->grid, field->x, field->y);////////
 	free(line);
 }
