@@ -93,37 +93,53 @@ t_dot		*find_spot(t_piece *piece, t_grid *field)
 	return (opt);
 }
 
+short int	get_char_token(char **tok, short int lines)
+{
+	short int	ast;
+	short int	i;
+	short int	j;
+
+	i = -1;
+	ast = 0;
+	while (++i < lines)
+	{
+		get_next_line(0, &tok[i]);
+		j = 0;
+		while (tok[i][j])
+		{
+			if (tok[i][j++] == '*')
+				ast++;
+		}
+	}
+	return (ast);
+}
+
 void	get_piece(t_piece *piece)
 {
-	char	*line;
-	int		i;
-	int		j;
-	t_dot	*ptr_coord;
+	char		**tok;
+	int			i;
+	int			j;
+	t_dot		*ptr_coord;
+	short int	ast;
 
 	get_xy(&piece->cols, &piece->rows);
-	piece->coords = (t_dot *)malloc(sizeof(t_dot) * (piece->rows * piece->cols + 1));
-	bzero_coords(piece->coords, piece->rows * piece->cols + 1);
+	tok = (char **)malloc(sizeof(char *) * piece->rows);
+	ast = get_char_token(tok, piece->rows);
+	piece->coords = (t_dot *)malloc(sizeof(t_dot) * (ast + 1));
+	bzero_coords(piece->coords, ast + 1);
 	i = -1;
 	ptr_coord = piece->coords;
 	while (++i < piece->rows)
 	{
-		get_next_line(0, &line);
-		j = 0;
-		while (*(line + j))
+		//dprintf(3, "line: %s\n", tok[i]);
+		j = -1;
+		while (tok[i][++j])
 		{
-			if (*(line + j) == '*')
-			{
-				ptr_coord->x = j;
-				ptr_coord->y = i;
-				//dprintf(3, "ptr_coord->x: %d\n", ptr_coord->x);//
-			 	//dprintf(3, "ptr_coord->y: %d\n", ptr_coord->y);//
-				ptr_coord++;
-			}
-			j++;
+			if (tok[i][j] == '*')
+				set_dot(ptr_coord++, j, i);
 		}
 	}
-	ptr_coord->x = -1;
-	ptr_coord->y = -1;
-	print_coords(piece->coords);
-	free(line);
+	set_dot(ptr_coord, -1, -1);
+	print_coords(piece->coords);/////////
+	free_matrix(tok, piece->rows);
 }

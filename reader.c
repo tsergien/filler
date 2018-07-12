@@ -20,13 +20,11 @@ void				get_xy(short int *x, short int *y)
 	while (*line && !ft_isdigit(*line))
 		line++;
 	*y = ft_atoi(line);
-	dprintf(3, "y: %d\n", *y);/////
 	while (ft_isdigit(*line))
 		line++;
 	while (*line && !ft_isdigit(*line))
 		line++;
 	*x = ft_atoi(line);
-	dprintf(3, "x: %hd\n", *x);/////
 }
 
 void				set_line(char *line, short int *array)
@@ -74,4 +72,13 @@ void		set_dot(t_dot *xy, short int x, short int y)
 {
 	xy->x = x;
 	xy->y = y;
+}
+
+void	free_matrix(char **m, int lines)
+{
+	int		i;
+
+	i = -1;
+	while (++i < lines)
+		free(m[i]);
 }

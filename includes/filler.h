@@ -63,5 +63,6 @@ int		is_end_game(t_piece *piece, t_grid *field);
 int		insertable(t_piece *piece, short int x, short int y, t_grid *field);
 void	bzero_coords(t_dot *s, int n);
 void	set_dot(t_dot *xy, short int x, short int y);
+void	free_matrix(char **m, int lines);
 
 #endif

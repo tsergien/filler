@@ -1,6 +1,6 @@
-seed = 2046
+seed = 6651
 O: timedout
 ./giena.filler: Segfault at 0
 players/carli.filler won
 Score:
-0AGAINST29
+0AGAINST1

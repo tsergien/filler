@@ -78,6 +78,7 @@ void	print_coords(t_dot *coords)
 	t_dot *p;
 
 	p = coords;
+	dprintf(3, "*** got coords: \n");
 	while (p->x != -1)
 	{
 		dprintf(3, "p->x: %d, p->y: %d\n", p->x, p->y);
