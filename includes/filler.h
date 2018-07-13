@@ -14,7 +14,7 @@
 # define FILLER_H
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
-
+# include <stdio.h>//
 typedef struct	s_dot
 {
 	short int	x;
@@ -35,7 +35,10 @@ typedef struct	s_piece
 	short int	cols;
 	t_dot		*coords;
 	t_dot		min;
+	t_dot		max;
 }				t_piece;
+
+int fd;
 
 /***************FILLER******************/
 void	fill_grid();
@@ -43,13 +46,13 @@ t_dot	*find_dot(t_grid *field, t_piece *piece);
 
 /***************READING*****************/
 void	get_grid(t_grid *field, char *line);
-void	get_xy(short int *x, short int *y, char *line);
+// void	get_xy(short int *x, short int *y, char *line);
 
 /****************MAP********************/
-// void	print_map(short int **map, short int x, short int y);//
-// void	print_coords(t_dot *coords);
-// void	print_dot(t_dot *xy);
-// void	print_map_dist(short int **map, short int x, short int y);//
+void	print_map(short int **map, short int x, short int y);//
+void	print_coords(t_dot *coords);
+void	print_dot(t_dot *xy);
+void	print_map_dist(short int **map, short int x, short int y);//
 
 /****************DISTANCE**************/
 t_dot	*find_spot(t_piece *piece, t_grid *field);

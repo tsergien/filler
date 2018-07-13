@@ -39,9 +39,9 @@ static int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 	while (ptr_coords->x != -1)
 	{
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -map->player_num)
-			overlap++;
-		if (map->grid[y + ptr_coords->y][x + ptr_coords->x]
-		 == -op_num || overlap > 1)
+			overlap = overlap + 1;
+		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -op_num
+        || overlap > 1)
 			return (0);
 		ptr_coords++;
 	}
@@ -58,14 +58,16 @@ t_dot		*find_spot(t_piece *piece, t_grid *field)
 	t_dot		*opt;
 	int			new_dist;
 	
+    print_map_dist(field->grid, field->x, field->y);////////////////
+    print_coords(piece->coords);////////////////////////////////////
 	opt = (t_dot *)malloc(sizeof(t_dot));
 	i = -1;
-	dist = field->x + field->y + 1;
+	dist = 100000;
 	set_dot(opt, 0, 0);
-	while (++i < field->y - piece->rows + 1)
+	while (++i < field->y - piece->max.y)
 	{
 		j = -1;
-		while (++j < field->x - piece->cols + 1)
+		while (++j < field->x - piece->max.x)
 		{
 			if (insertable(piece, j, i, field))
 			{

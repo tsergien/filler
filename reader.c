@@ -54,7 +54,6 @@ void		get_grid(t_grid *field, char *line)
 	{
 		get_next_line(0, &line);
 		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x));
-		ft_bzero(field->grid[i], field->x);
 		set_line(line + 4, field->grid[i]);
 		free(line);
 	}

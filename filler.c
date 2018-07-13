@@ -45,6 +45,7 @@ void				fill_grid()
 	t_piece	*piece;
 	t_dot	*res;
 	char	*line;
+	char	got_map;
 
 	field = (t_grid *)malloc(sizeof(t_grid));
 	piece = (t_piece *)malloc(sizeof(t_piece));
@@ -53,11 +54,16 @@ void				fill_grid()
 	free(line);
 	while (get_next_line(0, &line) > 0)
 	{
+		got_map = 0;
 		if (ft_strncmp(line, "Plat", 4) == 0)
+		{
+			got_map = 1;
 			get_grid(field, line);
+		}
 		get_piece(piece);
 		res = find_dot(field, piece);
-		free_job(field->grid, field->y, piece->coords);
+		if (got_map)
+			free_job(field->grid, field->y, piece->coords);
 		free(line);
 		output(res);
 	}

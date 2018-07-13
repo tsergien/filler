@@ -66,10 +66,30 @@ void	normalize(t_piece *tok)
 		p++;
 	}
 	p = tok->coords;
+	if (!(tok->min.x == 0 && tok->min.y == 0))
+	{
+		while (p->x != -1)
+		{
+			p->x -= tok->min.x;
+			p->y -= tok->min.y;
+			p++;
+		}
+	}
+}
+
+void	set_max_xy(t_piece *tok)
+{
+	t_dot	*p;
+
+	p = tok->coords;
+	tok->max.x = 0;
+	tok->max.y = 0;
 	while (p->x != -1)
 	{
-		p->x -= tok->min.x;
-		p->y -= tok->min.y;
+		if (p->x > tok->max.x)
+			tok->max.x = p->x;
+		if (p->y > tok->max.y)
+			tok->max.y = p->y;
 		p++;
 	}
 }
@@ -98,6 +118,7 @@ void	get_piece(t_piece *piece)
 				set_dot(ptr_coord++, j, i);
 		}
 	}
+	set_max_xy(piece);
 	normalize(piece);
 	free_matrix(tok, piece->rows);
 }

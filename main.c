@@ -14,6 +14,7 @@
 
 int		main(void)
 {
+	fd = open("file.txt", O_CREAT | O_TRUNC | O_WRONLY);//
 	fill_grid();
 	return (0);
 }
