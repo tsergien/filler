@@ -65,6 +65,7 @@ void				fill_grid()
 		if (got_map)
 			free_job(field->grid, field->y, piece->coords);
 		free(line);
+		dprintf(fd, "output: %d %d\n", res->y, res->x);
 		output(res);
 	}
 }
