@@ -12,7 +12,7 @@
 
 #include "includes/filler.h"
 
-void		fill_min_dist(short int x, short int y, t_grid *field)
+static void		fill_min_dist(short int x, short int y, t_grid *field)
 {
 	short int		op_num;
 	short int		i;
@@ -62,7 +62,7 @@ void			bzero_coords(t_dot *s, int n)
 	ptr = s;
 	while (n--)
 	{
-		set_dot(ptr, 0, 0);
+		set_dot(ptr, -1, -1);
 		ptr++;
 	}
 }

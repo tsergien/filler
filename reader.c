@@ -12,11 +12,8 @@
 
 #include "includes/filler.h"
 
-void				get_xy(short int *x, short int *y, char *line)
+void		get_xy(short int *x, short int *y, char *line)
 {
-	//char	*line;
-
-	//get_next_line(0, &line);while gnl... in filler.c
 	while (*line && !ft_isdigit(*line))
 		line++;
 	*y = ft_atoi(line);
@@ -27,7 +24,7 @@ void				get_xy(short int *x, short int *y, char *line)
 	*x = ft_atoi(line);
 }
 
-void				set_line(char *line, short int *array)
+void		set_line(char *line, short int *array)
 {
 	int		i;
 
@@ -44,13 +41,14 @@ void				set_line(char *line, short int *array)
 	}
 }
 
-void				get_grid(t_grid *field, char *line)
+void		get_grid(t_grid *field, char *line)
 {
 	int		i;
 
 	i = -1;
 	get_xy(&(field->x), &(field->y), line);
 	get_next_line(0, &line);
+	free(line);
 	field->grid = (short int **)malloc(sizeof(short int *) * (field->y));
 	while (++i < field->y)
 	{
@@ -58,6 +56,7 @@ void				get_grid(t_grid *field, char *line)
 		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x));
 		ft_bzero(field->grid[i], field->x);
 		set_line(line + 4, field->grid[i]);
+		free(line);
 	}
 }
 
@@ -67,7 +66,7 @@ void		set_dot(t_dot *xy, short int x, short int y)
 	xy->y = y;
 }
 
-void	free_matrix(char **m, int lines)
+void		free_matrix(char **m, int lines)
 {
 	int		i;
 
