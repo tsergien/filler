@@ -24,7 +24,7 @@ void		get_xy(short int *x, short int *y, char *line)
 	*x = ft_atoi(line);
 }
 
-void		set_line(char *line, short int *array)
+void		set_line(char *line, short int *array, int empty)
 {
 	int		i;
 
@@ -32,7 +32,7 @@ void		set_line(char *line, short int *array)
 	while (*line)
 	{
 		if (*line == '.')
-			array[i++] = 0;
+			array[i++] = empty;
 		else if (*line == 'X' || *line == 'x')
 			array[i++] = -2;
 		else if (*line == 'O' || *line == 'o')
@@ -44,9 +44,11 @@ void		set_line(char *line, short int *array)
 void		get_grid(t_grid *field, char *line)
 {
 	int		i;
+	int		empty;
 
 	i = -1;
 	get_xy(&(field->x), &(field->y), line);
+	empty = field->x + field->y + 2;
 	get_next_line(0, &line);
 	free(line);
 	field->grid = (short int **)malloc(sizeof(short int *) * (field->y));
@@ -54,7 +56,7 @@ void		get_grid(t_grid *field, char *line)
 	{
 		get_next_line(0, &line);
 		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x));
-		set_line(line + 4, field->grid[i]);
+		set_line(line + 4, field->grid[i], empty);
 		free(line);
 	}
 }

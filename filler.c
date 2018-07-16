@@ -14,6 +14,7 @@
 
 static void			output(t_dot *xy)
 {
+	dprintf(g_fd, "output: %d %d\n", xy->y, xy->x);
 	ft_putnbr_fd(xy->y, 1);
 	write(1, " ", 1);
 	ft_putnbr_fd(xy->x, 1);
@@ -29,17 +30,21 @@ static short int	get_num_str(char *line)
 	return (ft_atoi(line));
 }
 
-static void			free_job(short int **map, short int lines, t_dot *coords)
+static void			free_job(short int **map,
+					short int lines, t_dot *coords, char got_map)
 {
 	int		i;
 
 	i = -1;
-	while (++i < lines)
-		free(map[i]);
+	if (got_map)
+	{
+		while (++i < lines)
+			free(map[i]);
+	}
 	free(coords);
 }
 
-void				fill_grid()
+void				fill_grid(void)
 {
 	t_grid	*field;
 	t_piece	*piece;
@@ -62,10 +67,8 @@ void				fill_grid()
 		}
 		get_piece(piece);
 		res = find_dot(field, piece);
-		if (got_map)
-			free_job(field->grid, field->y, piece->coords);
+		free_job(field->grid, field->y, piece->coords, got_map);
 		free(line);
-		dprintf(fd, "output: %d %d\n", res->y, res->x);
 		output(res);
 	}
 }

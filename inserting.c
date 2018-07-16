@@ -12,7 +12,8 @@
 
 #include "includes/filler.h"
 
-static int		dist_sum(short int **map, t_piece *tok, short int x, short int y)
+static int		dist_sum(short int **map, t_piece *tok,
+				short int x, short int y)
 {
 	int		sum;
 	t_dot	*ptr;
@@ -41,7 +42,7 @@ static int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -map->player_num)
 			overlap = overlap + 1;
 		if (map->grid[y + ptr_coords->y][x + ptr_coords->x] == -op_num
-        || overlap > 1)
+			|| overlap > 1)
 			return (0);
 		ptr_coords++;
 	}
@@ -50,35 +51,41 @@ static int		insertable(t_piece *tok, short int x, short int y, t_grid *map)
 	return (1);
 }
 
-t_dot		*find_spot(t_piece *piece, t_grid *field)
+static void		find_opt(t_grid *field, t_dot *opt, t_piece *piece, int *dist)
 {
-	int			dist;
-	int			i;
-	int			j;
-	t_dot		*opt;
-	int			new_dist;
-	
-    print_map_dist(field->grid, field->x, field->y);////////////////
-    print_coords(piece->coords);////////////////////////////////////
-	opt = (t_dot *)malloc(sizeof(t_dot));
+	int		i;
+	int		j;
+	int		new_dist;
+
 	i = -1;
-	dist = 100000;
-	set_dot(opt, 0, 0);
-	while (++i < field->y - piece->max.y)
+	while (++i < field->y - (piece->max.y - piece->min.y))
 	{
 		j = -1;
-		while (++j < field->x - piece->max.x)
+		while (++j < field->x - (piece->max.x - piece->min.x))
 		{
 			if (insertable(piece, j, i, field))
 			{
 				new_dist = dist_sum(field->grid, piece, j, i);
-				if (new_dist < dist)
+				if (new_dist < *dist)
 				{
-					dist = new_dist;
+					*dist = new_dist;
 					set_dot(opt, j - piece->min.x, i - piece->min.y);
 				}
 			}
 		}
 	}
+}
+
+t_dot			*find_spot(t_piece *piece, t_grid *field)
+{
+	int			dist;
+	t_dot		*opt;
+
+	print_map_dist(field->grid, field->x, field->y);
+	print_coords(piece->coords);
+	opt = (t_dot *)malloc(sizeof(t_dot));
+	dist = 100000;
+	set_dot(opt, 0, 0);
+	find_opt(field, opt, piece, &dist);
 	return (opt);
 }

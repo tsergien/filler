@@ -51,10 +51,10 @@ static void	get_xy_piece(short int *x, short int *y)
 	free(ptr);
 }
 
-void	normalize(t_piece *tok)
+void		normalize(t_piece *tok)
 {
 	t_dot	*p;
-	
+
 	p = tok->coords;
 	set_dot(&tok->min, tok->cols, tok->rows);
 	while (p->x != -1)
@@ -66,6 +66,7 @@ void	normalize(t_piece *tok)
 		p++;
 	}
 	p = tok->coords;
+	dprintf(g_fd, "min.x = %d, min.y = %d\n", tok->min.x, tok->min.y);
 	if (!(tok->min.x == 0 && tok->min.y == 0))
 	{
 		while (p->x != -1)
@@ -77,7 +78,7 @@ void	normalize(t_piece *tok)
 	}
 }
 
-void	set_max_xy(t_piece *tok)
+void		set_max_xy(t_piece *tok)
 {
 	t_dot	*p;
 
@@ -92,9 +93,10 @@ void	set_max_xy(t_piece *tok)
 			tok->max.y = p->y;
 		p++;
 	}
+	dprintf(g_fd, "max.x = %d, max.y = %d\n", tok->max.x, tok->max.y);
 }
 
-void	get_piece(t_piece *piece)
+void		get_piece(t_piece *piece)
 {
 	char		**tok;
 	int			i;

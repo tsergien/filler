@@ -14,7 +14,8 @@
 # define FILLER_H
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
-# include <stdio.h>//
+# include <stdio.h>
+
 typedef struct	s_dot
 {
 	short int	x;
@@ -38,29 +39,34 @@ typedef struct	s_piece
 	t_dot		max;
 }				t_piece;
 
-int fd;
+int		g_fd;
 
-/***************FILLER******************/
-void	fill_grid();
-t_dot	*find_dot(t_grid *field, t_piece *piece);
-
-/***************READING*****************/
-void	get_grid(t_grid *field, char *line);
-// void	get_xy(short int *x, short int *y, char *line);
-
-/****************MAP********************/
-void	print_map(short int **map, short int x, short int y);//
-void	print_coords(t_dot *coords);
-void	print_dot(t_dot *xy);
-void	print_map_dist(short int **map, short int x, short int y);//
-
-/****************DISTANCE**************/
-t_dot	*find_spot(t_piece *piece, t_grid *field);
-
-/****************PIECE******************/
-void	get_piece(t_piece *piece);
-void	bzero_coords(t_dot *s, int n);
-void	set_dot(t_dot *xy, short int x, short int y);
-void	free_matrix(char **m, int lines);
+/*
+**************FILLER*****************
+*/
+void			fill_grid();
+t_dot			*find_dot(t_grid *field, t_piece *piece);
+/*
+**************READING****************
+*/
+void			get_grid(t_grid *field, char *line);
+/*
+***************MAP*******************
+*/
+void			print_map(short int **map, short int x, short int y);
+void			print_coords(t_dot *coords);
+void			print_dot(t_dot *xy);
+void			print_map_dist(short int **map, short int x, short int y);
+/*
+***************DISTANCE*************
+*/
+t_dot			*find_spot(t_piece *piece, t_grid *field);
+/*
+***************PIECE*****************
+*/
+void			get_piece(t_piece *piece);
+void			bzero_coords(t_dot *s, int n);
+void			set_dot(t_dot *xy, short int x, short int y);
+void			free_matrix(char **m, int lines);
 
 #endif
