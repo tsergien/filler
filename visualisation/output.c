@@ -11,17 +11,18 @@
 /* ************************************************************************** */
 
 #include "../includes/my_mlx.h"
-#include <stdio.h>
 
-int     output_mlx(t_params *par)
+int			output_mlx(t_params *par)
 {
-    mlx_clear_window(par->p->mlx_ptr, par->p->win_ptr);
-    mlx_string_put(par->p->mlx_ptr, par->p->win_ptr, 10, 10, 0xc6c6c6, "Press escape to exit");
-	mlx_string_put(par->p->mlx_ptr, par->p->win_ptr, 370, 20, BLUE, par->names->player1);
-	mlx_string_put(par->p->mlx_ptr, par->p->win_ptr, WIN_WIDTH / 2 - 20, 20, WHITE, "vs");
+	mlx_string_put(par->p->mlx_ptr, par->p->win_ptr,
+		7, 3, 0xc6c6c6, "Press escape to exit");
+	mlx_string_put(par->p->mlx_ptr, par->p->win_ptr,
+		370, 30, BLUE, par->names->player1);
+	mlx_string_put(par->p->mlx_ptr, par->p->win_ptr,
+		WIN_WIDTH / 2 - 20, 30, WHITE, "vs");
 	mlx_string_put(par->p->mlx_ptr, par->p->win_ptr, WIN_WIDTH - 470,
-    20, PINK, par->names->player2);
-    put_field(par->p, par->map);
+	30, PINK, par->names->player2);
+	put_field(par->p, par->map);
 	return (1);
 }
 
@@ -34,30 +35,55 @@ void		free_map(short int **map, int lines)
 		free(map[i]);
 }
 
-void            visualise(t_mlx *p)
+int			deal_space(int key, t_params *par)
 {
-	char		*line;
-	t_grid		*map;
-	t_names		*names;
-	t_params	*params;
+	if (key == 32)
+		return (output_mlx(par));
+	return (0);
+}
 
-	params = (t_params *)malloc(sizeof(t_params));
-	names = (t_names *)malloc(sizeof(t_names));
-	map = (t_grid *)malloc(sizeof(t_grid));
-	get_players(map, names);
-	params->p = p;
-	params->names = names;
-	while (get_next_line(0, &line))
+void		win(t_params *par, char *line)
+{
+	char	*ptr;
+	int		res1;
+	int		res2;
+
+	ptr = line;
+	while (!ft_isdigit(*ptr))
+		ptr++;
+	res1 = ft_atoi(ptr);
+	mlx_string_put(par->p->mlx_ptr, par->p->win_ptr,
+		370, 50, BLUE, ft_itoa(res1));
+	if (get_next_line(0, &line) > 0)
 	{
-		if (ft_strncmp("Plat", line, 4) == 0)
-		{
-			params->map = map;
-			get_map(map, line);
-			dprintf(3, "here\n");
-			mlx_loop_hook(p, output_mlx, params);
-			free_map(map->grid, map->y);
-			//output_mlx(p, map, names);
-		}
+		ptr = line;
+		while (!ft_isdigit(*ptr))
+			ptr++;
+		res2 = ft_atoi(ptr);
+		mlx_string_put(par->p->mlx_ptr, par->p->win_ptr,
+			WIN_WIDTH - 470, 50, PINK, ft_itoa(res2));
 		free(line);
 	}
+}
+
+int			visualise(t_params *par)
+{
+	char	*line;
+	int		ret;
+
+	ret = get_next_line(0, &line);
+	if (ret > 0 && ft_strncmp("Plat", line, 4) == 0)
+	{
+		mlx_clear_window(par->p->mlx_ptr, par->p->win_ptr);
+		get_map(par->map, line);
+		output_mlx(par);
+		free_map(par->map->grid, par->map->y);
+		free(line);
+	}
+	else if (ret > 0 && ft_strncmp("== ", line, 3) == 0)
+	{
+		win(par, line);
+		free(line);
+	}
+	return (0);
 }

@@ -5,32 +5,33 @@
 #                                                     +:+ +:+         +:+      #
 #    By: tsergien <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/07/06 15:42:17 by tsergien          #+#    #+#              #
-#    Updated: 2018/07/17 14:06:41 by tsergien         ###   ########.fr        #
+#    Created: 2018/07/18 19:50:38 by tsergien          #+#    #+#              #
+#    Updated: 2018/07/18 19:50:40 by tsergien         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = tsergien.filler
+NAME = visualiser
 
-SRC = main.c reader.c distance.c map.c filler.c piece.c inserting.c
+SRC = field.c mlx.c	output.c ../reader.c
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+WWW = -Wall -Wextra -Werror
 
-HEDER = -I includes/
+FLAGS = -lmlx -framework OpenGl -framework AppKit
 
-LIB_DIR = libft/
+HEDER = -I ../includes/
+
+LIB_DIR = ../libft/
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR)
-	@gcc $(OBJ) -o $(NAME) -L $(LIB_DIR) -lft
-	@echo "=== ready player one :)==="
+	@gcc $(FLAGS) $(OBJ) -I /usr/local/include -L /usr/local/lib/ -L $(LIB_DIR) -lft -o $(NAME)
 
 %.o: %.c
-	@gcc $(FLAGS) -o $@ -c $< $(HEADER)
+	@gcc $(WWW) -o $@ -c $< $(HEADER)
 
 clean:
 	@make -C $(LIB_DIR) clean -silent
@@ -40,6 +41,6 @@ clean:
 fclean: clean
 	@make -C $(LIB_DIR) fclean -silent
 	@rm -f $(NAME)
-	@echo "player file cleaned."
+	@echo "visualiser file cleaned."
 
 re: fclean all

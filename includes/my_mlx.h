@@ -24,9 +24,6 @@
 # define LIGHT_PINK 0xe59ebc
 # define WHITE 0xffffff
 
-
-int fd;///////////////////////
-
 typedef struct  s_mlx
 {
     void    *mlx_ptr;
@@ -46,9 +43,10 @@ typedef struct  s_params
     t_names *names;
 }               t_params;
 
-void            visualise(t_mlx *p);
+int             visualise(t_params *par);
 void	        put_field(t_mlx *p, t_grid *map);
 void			get_map(t_grid *field, char *line);
-void			get_players(t_grid *map, t_names *names);
+void			get_players(t_names *names);
+void			set_line(char *line, short int *array);
 
 #endif

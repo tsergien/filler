@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/my_mlx.h"
-#include <stdio.h>///
 
 char			*get_name(char *line)
 {
@@ -25,21 +24,17 @@ char			*get_name(char *line)
 	while (*end && ft_isalpha(*end))
 		end++;
 	name = ft_strsub(start, 0, end - start);
-	dprintf(fd, "player_name: %s\n", name);
 	return (name);
 }
 
-void			get_players(t_grid *map, t_names *names)
+void			get_players(t_names *names)
 {
 	char	*line;
-	char	*start;
-	char	*end;
 	char	flag;
 
 	flag = 0;
 	while (flag < 2 && get_next_line(0, &line) > 0)
 	{
-		dprintf(fd, "line : %s\n", line);
 		if (ft_strstr(line, "exec"))
 		{
 			flag++;
@@ -52,7 +47,7 @@ void			get_players(t_grid *map, t_names *names)
 	}
 }
 
-static void		set_line(char *line, short int *array)
+void			set_line(char *line, short int *array)
 {
 	int		i;
 
@@ -73,49 +68,26 @@ static void		set_line(char *line, short int *array)
 	}
 }
 
-static int      deal_key(int key, void *param)
+static int		exit_x(void)
 {
-	if (key == 53)
-		exit(1);
-	return (0);
-}
-
-static int      exit_x(void *par)
-{
-	par = NULL;
 	exit(1);
 	return (0);
 }
 
-void			get_map(t_grid *field, char *line)
-{
-	int		i;
-
-	i = -1;
-	get_xy(&(field->x), &(field->y), line);
-	get_next_line(0, &line);
-	free(line);
-	field->grid = (short int **)malloc(sizeof(short int *) * (field->y));
-	while (++i < field->y)
-	{
-		get_next_line(0, &line);
-		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x));
-		set_line(line + 4, field->grid[i]);
-		free(line);
-	}
-}
-
 int				main(void)
 {
-	t_mlx	*p;
+	t_params	*par;
 
-	fd = open("file.txt", O_CREAT | O_TRUNC | O_WRONLY);//
-	p = (t_mlx *)malloc(sizeof(t_mlx));
-	p->mlx_ptr = mlx_init();
-	p->win_ptr = mlx_new_window(p->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Filler");
-	visualise(p);
-	mlx_hook(p->win_ptr, 2, 5, deal_key, (void *)0);
-	mlx_hook(p->win_ptr, 17, 1L << 17, exit_x, (void *)0);
-	mlx_loop(p->mlx_ptr);
+	par = (t_params *)malloc(sizeof(t_params));
+	par->p = (t_mlx *)malloc(sizeof(t_mlx));
+	par->names = (t_names *)malloc(sizeof(t_names));
+	par->map = (t_grid *)malloc(sizeof(t_grid));
+	get_players(par->names);
+	par->p->mlx_ptr = mlx_init();
+	par->p->win_ptr = mlx_new_window(par->p->mlx_ptr,
+		WIN_WIDTH, WIN_HEIGHT, "Filler");
+	mlx_loop_hook(par->p->mlx_ptr, visualise, par);
+	mlx_hook(par->p->win_ptr, 17, 0, exit_x, (void *)0);
+	mlx_loop(par->p->mlx_ptr);
 	return (0);
 }

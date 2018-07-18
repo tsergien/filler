@@ -12,7 +12,25 @@
 
 #include "../includes/my_mlx.h"
 
-static void     put_square(t_mlx *p, t_dot coords, int size, int color)
+void			get_map(t_grid *field, char *line)
+{
+	int		i;
+
+	i = -1;
+	get_xy(&(field->x), &(field->y), line);
+	get_next_line(0, &line);
+	free(line);
+	field->grid = (short int **)malloc(sizeof(short int *) * (field->y));
+	while (++i < field->y)
+	{
+		get_next_line(0, &line);
+		field->grid[i] = (short int *)malloc(sizeof(short int) * (field->x));
+		set_line(line + 4, field->grid[i]);
+		free(line);
+	}
+}
+
+static void		put_square(t_mlx *p, t_dot coords, int size, int color)
 {
 	int		i;
 	int		j;
@@ -30,23 +48,23 @@ static void     put_square(t_mlx *p, t_dot coords, int size, int color)
 	}
 }
 
-static int      get_color(short int cell)
+static int		get_color(short int cell)
 {
-    if (cell == -1)
-        return (BLUE);
-    else if (cell == -3)
-        return (LIGHT_BLUE);
-    if (cell == -2)
-        return (PINK);
-    else if (cell == -4)
-        return (LIGHT_PINK);
-    return (C_EMPTY);
+	if (cell == -1)
+		return (BLUE);
+	else if (cell == -3)
+		return (LIGHT_BLUE);
+	if (cell == -2)
+		return (PINK);
+	else if (cell == -4)
+		return (LIGHT_PINK);
+	return (C_EMPTY);
 }
 
-void            put_field(t_mlx *p, t_grid *map)
+void			put_field(t_mlx *p, t_grid *map)
 {
-    t_dot   ij;
-    t_dot   coords;
+	t_dot	ij;
+	t_dot	coords;
 	int		skape;
 	int		start_i;
 	int		start_j;
@@ -59,10 +77,10 @@ void            put_field(t_mlx *p, t_grid *map)
 	{
 		ij.x = -1;
 		while (++ij.x < map->x)
-        {
-            coords.x = start_j + ij.x * skape + 2;
-            coords.y = start_i + ij.y * skape + 2;
-            put_square(p, coords, skape - 3, get_color(map->grid[ij.y][ij.x]));
-        }
+		{
+			coords.x = start_j + ij.x * skape + 2;
+			coords.y = start_i + ij.y * skape + 2;
+			put_square(p, coords, skape - 3, get_color(map->grid[ij.y][ij.x]));
+		}
 	}
 }
