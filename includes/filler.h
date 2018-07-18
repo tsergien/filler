@@ -50,6 +50,7 @@ t_dot			*find_dot(t_grid *field, t_piece *piece);
 **************READING****************
 */
 void			get_grid(t_grid *field, char *line);
+void			get_xy(short int *x, short int *y, char *line);
 /*
 ***************MAP*******************
 */
@@ -68,5 +69,9 @@ void			get_piece(t_piece *piece);
 void			bzero_coords(t_dot *s, int n);
 void			set_dot(t_dot *xy, short int x, short int y);
 void			free_matrix(char **m, int lines);
+/*
+****************MAP***************
+*/
+void			print_map_dist(short int **map, short int x, short int y);
 
 #endif

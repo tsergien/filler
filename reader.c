@@ -24,7 +24,7 @@ void		get_xy(short int *x, short int *y, char *line)
 	*x = ft_atoi(line);
 }
 
-void		set_line(char *line, short int *array, int empty)
+static void		set_line(char *line, short int *array, int empty)
 {
 	int		i;
 

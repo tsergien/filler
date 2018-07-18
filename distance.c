@@ -74,6 +74,7 @@ void			bzero_coords(t_dot *s, int n)
 }
 
 /*
+******************** MANHATTEN'S DISTANCES *********************
 **static void		fill_min_dist(short int x, short int y, t_grid *field)
 **{
 **	short int		op_num;

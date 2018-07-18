@@ -6,11 +6,11 @@
 #    By: tsergien <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/06 15:42:17 by tsergien          #+#    #+#              #
-#    Updated: 2018/07/06 15:42:20 by tsergien         ###   ########.fr        #
+#    Updated: 2018/07/17 14:06:41 by tsergien         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = giena.filler
+NAME = tsergien.filler
 
 SRC = main.c reader.c distance.c map.c filler.c piece.c inserting.c
 
