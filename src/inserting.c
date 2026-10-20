@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/filler.h"
+#include "filler.h"
 
 static int		dist_sum(short int **map, t_piece *tok,
 				short int x, short int y)

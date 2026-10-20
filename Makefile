@@ -12,34 +12,56 @@
 
 NAME = tsergien.filler
 
-SRC = main.c reader.c distance.c map.c filler.c piece.c inserting.c
+SRC = src/main.c src/reader.c src/distance.c src/map.c src/filler.c src/piece.c src/inserting.c
 
-OBJ = $(SRC:.c=.o)
+OBJ_DIR = obj
+OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
+DEP = $(OBJ:.o=.d)
 
-FLAGS = -Wall -Wextra -Werror
+WWW = -Wall -Wextra -Werror
 
-HEDER = -I includes/
+HEADER = includes/
 
 LIB_DIR = libft/
+LIBFT = $(LIB_DIR)libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+# libft is a git submodule: fetch it if the folder is still empty
+$(LIB_DIR)Makefile:
+	@git submodule update --init $(LIB_DIR)
+
+$(LIBFT): $(LIB_DIR)Makefile FORCE
 	@make -C $(LIB_DIR)
+
+$(NAME): $(OBJ) $(LIBFT)
 	@gcc $(OBJ) -o $(NAME) -L $(LIB_DIR) -lft
 	@echo "=== ready player one :)==="
 
-%.o: %.c
-	@gcc $(FLAGS) -o $@ -c $< $(HEADER)
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR) $(LIB_DIR)Makefile
+	@gcc $(WWW) -MMD -MP -I $(HEADER) -I $(LIB_DIR)includes -o $@ -c $<
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@make -C $(LIB_DIR) clean -silent
-	@rm -f $(OBJ)
+	@if [ -f $(LIB_DIR)Makefile ]; then make -C $(LIB_DIR) clean -silent; fi
+	@rm -rf $(OBJ_DIR)
 	@echo "obj files cleaned."
 
 fclean: clean
-	@make -C $(LIB_DIR) fclean -silent
-	@rm -f $(NAME)
-	@echo "player file cleaned."
+	@if [ -f $(LIB_DIR)Makefile ]; then make -C $(LIB_DIR) fclean -silent; fi
+	@rm -rf $(NAME) viewer/build
+	@echo "lib, objs, player, viewer cleaned."
 
 re: fclean all
+
+viewer:
+	@cmake -S viewer -B viewer/build > /dev/null
+	@cmake --build viewer/build
+
+FORCE:
+
+.PHONY: all clean fclean re viewer FORCE
+
+-include $(DEP)

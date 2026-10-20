@@ -1,0 +1,13 @@
+
+obj/
+
+.DS_Store
+file.txt
+tsergien.filler
+resources/filler.trace
+filler.trace
+
+viewer/build/
+viewer/tests
+viewer/TASKS.md
+

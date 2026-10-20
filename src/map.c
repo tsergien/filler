@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/filler.h"
+#include "filler.h"
 
 static char		get_symbol(short int cell)
 {

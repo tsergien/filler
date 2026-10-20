@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/filler.h"
+#include "filler.h"
 
 static void			output(t_dot *xy)
 {

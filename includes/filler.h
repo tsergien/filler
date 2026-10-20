@@ -12,8 +12,8 @@
 
 #ifndef FILLER_H
 # define FILLER_H
-# include "../libft/includes/libft.h"
-# include "../libft/includes/get_next_line.h"
+# include "libft.h"
+# include "get_next_line.h"
 # include <stdio.h>
 
 typedef struct	s_dot

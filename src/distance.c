@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/filler.h"
+#include "filler.h"
 
 static void		insert_cur_dist(t_grid *field, int cur_dist, int op_num)
 {

@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/filler.h"
+#include "filler.h"
 
 int		main(void)
 {
-	g_fd = open("file.txt", O_CREAT | O_TRUNC | O_WRONLY);
+	g_fd = open("file.txt", O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	fill_grid();
 	return (0);
 }
